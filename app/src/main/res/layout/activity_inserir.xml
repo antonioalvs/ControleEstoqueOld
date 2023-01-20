@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Inserir">
+
+    <EditText
+        android:id="@+id/txtNome"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:ems="10"
+        android:hint="Nome do produto"
+        android:inputType="textPersonName"
+        app:layout_constraintStart_toStartOf="@+id/lblCodigo"
+        app:layout_constraintTop_toBottomOf="@+id/lblCodigo" />
+
+    <TextView
+        android:id="@+id/lblCodigo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="100dp"
+        android:text="Codigo"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="100dp"
+        android:text="Salvar"
+        app:layout_constraintStart_toEndOf="@+id/txtQtdAtual"
+        app:layout_constraintTop_toBottomOf="@+id/txtQtdAtual" />
+
+    <EditText
+        android:id="@+id/txtValor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:ems="10"
+        android:hint="Valor"
+        android:inputType="numberDecimal"
+        android:textAllCaps="false"
+        app:layout_constraintStart_toStartOf="@+id/txtNome"
+        app:layout_constraintTop_toBottomOf="@+id/txtNome" />
+
+    <EditText
+        android:id="@+id/txtQtdAtual"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:ems="10"
+        android:hint="Quantidade Atual"
+        android:inputType="number"
+        app:layout_constraintStart_toStartOf="@+id/txtQtdMin"
+        app:layout_constraintTop_toBottomOf="@+id/txtQtdMin" />
+
+    <EditText
+        android:id="@+id/txtQtdMin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:ems="10"
+        android:hint="Quantidade Mínima"
+        android:inputType="number"
+        app:layout_constraintStart_toStartOf="@+id/txtValor"
+        app:layout_constraintTop_toBottomOf="@+id/txtValor" />
+
+</android.support.constraint.ConstraintLayout>
