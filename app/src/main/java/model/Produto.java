@@ -1,5 +1,7 @@
 package model;
 
+import java.util.Locale;
+
 public class Produto {
 
     //Vars
@@ -8,6 +10,16 @@ public class Produto {
     private float valorProduto;
     private int qtdAtual;
     private int qtdMinima;
+
+    //Construtor
+    public Produto(String nomeProduto, float valorProduto, int qtdAtual, int qtdMinima){
+        this.codigo = 0;
+        this.nomeProduto = nomeProduto;
+        this.valorProduto = valorProduto;
+        this.qtdAtual = qtdAtual;
+        this.qtdMinima = qtdMinima;
+    }
+
 
     //Getters and Setters
 
