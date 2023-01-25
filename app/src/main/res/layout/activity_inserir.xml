@@ -28,10 +28,11 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/btnSalvar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="60dp"
         android:text="Salvar"
         app:layout_constraintStart_toEndOf="@+id/txtQtdAtual"
         app:layout_constraintTop_toBottomOf="@+id/txtQtdAtual" />
@@ -69,5 +70,26 @@
         android:inputType="number"
         app:layout_constraintStart_toStartOf="@+id/txtValor"
         app:layout_constraintTop_toBottomOf="@+id/txtValor" />
+
+    <Button
+        android:id="@+id/btnProximo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        android:text="Proximo"
+        app:layout_constraintStart_toStartOf="@+id/txtQtdAtual"
+        app:layout_constraintTop_toBottomOf="@+id/txtQtdAtual" />
+
+    <TextView
+        android:id="@+id/lblResult"
+        android:layout_width="296dp"
+        android:layout_height="131dp"
+        android:layout_marginTop="60dp"
+        android:layout_marginEnd="4dp"
+        android:text="TextView"
+        app:layout_constraintEnd_toEndOf="@+id/btnSalvar"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/btnProximo"
+        app:layout_constraintTop_toBottomOf="@+id/btnProximo" />
 
 </android.support.constraint.ConstraintLayout>
