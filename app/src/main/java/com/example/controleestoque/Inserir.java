@@ -4,8 +4,11 @@ import model.Produto;
 //import model.No;
 import model.ListaEncadeada;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteStatement;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -17,6 +20,7 @@ public class Inserir extends AppCompatActivity {
     Button prx, save;
     EditText nome, valor, qtdAtual, qtdMin;
     TextView res;
+    private SQLiteDatabase bdLite;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,8 +61,29 @@ public class Inserir extends AppCompatActivity {
                 String r = String.valueOf(res.getText());
                 res.setText(r + nr);
 
+                //Cadastra produto Banco de Dados
+                cadastrar();
+
                 //Limpa campos
                 limpaTela();
+            }
+
+            public void cadastrar(){
+                if(!TextUtils.isEmpty(nome.getText().toString())) {
+                    try {
+                        bdLite = openOrCreateDatabase("estoque", MODE_PRIVATE, null);
+                        String sql = "INSERT INTO estoque (nomeProduto, valorProduto, qtMinima, qtAtual) VALUES (?, ?, ?, ?)";
+                        SQLiteStatement stmt = bdLite.compileStatement(sql);
+                        stmt.bindString(1, nome.getText().toString());
+                        stmt.bindDouble(2, Double.parseDouble(String.valueOf(valor.getText())));
+                        stmt.bindString(3, qtdMin.getText().toString());
+                        stmt.bindString(4, qtdAtual.getText().toString());
+                        stmt.executeInsert();
+                        bdLite.close();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
             }
 
             public void limpaTela(){
