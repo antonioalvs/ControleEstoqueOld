@@ -1,4 +1,4 @@
-package model;
+package com.example.controleestoque.model;
 
 
 public class ListaEncadeada {

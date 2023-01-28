@@ -1,9 +1,10 @@
 package com.example.controleestoque;
 
-import model.Produto;
+import com.example.controleestoque.bd.Sqlite;
+import com.example.controleestoque.model.Produto;
 //import model.No;
-import model.ListaEncadeada;
-import android.content.Intent;
+import com.example.controleestoque.model.ListaEncadeada;
+
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteStatement;
 import android.support.v7.app.AppCompatActivity;
@@ -22,10 +23,18 @@ public class Inserir extends AppCompatActivity {
     TextView res;
     private SQLiteDatabase bdLite;
 
+    Sqlite db = new Sqlite(this);
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_inserir);
+
+        //Variáveis dos campos
+        nome = findViewById(R.id.txtNome);
+        valor = findViewById(R.id.txtValor);
+        qtdAtual = findViewById(R.id.txtQtdAtual);
+        qtdMin = findViewById(R.id.txtQtdMin);
 
         //Definindo campos e botões
         //prx = findViewById(R.id.btnProximo);
@@ -35,15 +44,11 @@ public class Inserir extends AppCompatActivity {
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //Variáveis dos campos
-                nome = findViewById(R.id.txtNome);
-                valor = findViewById(R.id.txtValor);
-                qtdAtual = findViewById(R.id.txtQtdAtual);
-                qtdMin = findViewById(R.id.txtQtdMin);
+
                 //Variaveis comuns
                 String n; //nome
                 float v; //valor
-                int qta, qtm; // qtd atual e qtd minima
+                int c = 0, qta, qtm; // qtd atual e qtd minima
 
                 //Passando valor dos campos para variáveis
                 n = String.valueOf(nome.getText());
@@ -52,7 +57,7 @@ public class Inserir extends AppCompatActivity {
                 qtm = Integer.parseInt(String.valueOf(qtdMin.getText()));
 
                 //Construindo o Produto
-                Produto p = new Produto(n,v,qta,qtm);
+                Produto p = new Produto(c,n,v,qta,qtm);
 
                 //Inserindo na lista de controle
                 String nr = "Nome do produto: " + n + "\nValor do Produto: R$" + v +
@@ -62,29 +67,29 @@ public class Inserir extends AppCompatActivity {
                 res.setText(r + nr);
 
                 //Cadastra produto Banco de Dados
-                cadastrar();
+                db.addProduto(new Produto(c, n, v, qta, qtm));
 
                 //Limpa campos
                 limpaTela();
             }
 
-            public void cadastrar(){
-                if(!TextUtils.isEmpty(nome.getText().toString())) {
-                    try {
-                        bdLite = openOrCreateDatabase("estoque", MODE_PRIVATE, null);
-                        String sql = "INSERT INTO estoque (nomeProduto, valorProduto, qtMinima, qtAtual) VALUES (?, ?, ?, ?)";
-                        SQLiteStatement stmt = bdLite.compileStatement(sql);
-                        stmt.bindString(1, nome.getText().toString());
-                        stmt.bindDouble(2, Double.parseDouble(String.valueOf(valor.getText())));
-                        stmt.bindString(3, qtdMin.getText().toString());
-                        stmt.bindString(4, qtdAtual.getText().toString());
-                        stmt.executeInsert();
-                        bdLite.close();
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
+//            public void cadastrar(){
+//                if(!TextUtils.isEmpty(nome.getText().toString())) {
+//                    try {
+//                        bdLite = openOrCreateDatabase("estoque", MODE_PRIVATE, null);
+//                        String sql = "INSERT INTO estoque (nomeProduto, valorProduto, qtMinima, qtAtual) VALUES (?, ?, ?, ?)";
+//                        SQLiteStatement stmt = bdLite.compileStatement(sql);
+//                        stmt.bindString(1, nome.getText().toString());
+//                        stmt.bindDouble(2, Double.parseDouble(String.valueOf(valor.getText())));
+//                        stmt.bindString(3, qtdMin.getText().toString());
+//                        stmt.bindString(4, qtdAtual.getText().toString());
+//                        stmt.executeInsert();
+//                        bdLite.close();
+//                    } catch (Exception e) {
+//                        e.printStackTrace();
+//                    }
+//                }
+//            }
 
             public void limpaTela(){
                 nome.setText("");

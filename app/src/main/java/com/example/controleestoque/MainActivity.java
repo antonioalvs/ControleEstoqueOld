@@ -8,7 +8,11 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ListAdapter;
 import android.widget.ListView;
+
+import com.example.controleestoque.bd.Sqlite;
+import com.example.controleestoque.model.Produto;
 
 import java.util.ArrayList;
 
@@ -21,6 +25,8 @@ public class MainActivity extends AppCompatActivity {
 
     private SQLiteDatabase bdLite;
     public ListView listViewProdutos;
+
+    Sqlite db = new Sqlite(this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,22 +66,25 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void listarDados() {
-        try {
-            bdLite = openOrCreateDatabase("estoque", MODE_PRIVATE, null);
-            Cursor meuCursor = bdLite.rawQuery("SELECT id, nomeProduto FROM estoque", null);
-            ArrayList<String> linhas = new ArrayList<String>();
-            ArrayAdapter meuAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,
-                    android.R.id.text1, linhas );
-            listViewProdutos.setAdapter(meuAdapter);
-            meuCursor.moveToFirst();
-            while(meuCursor!=null){
-                linhas.add(meuCursor.getString(1));
-                meuCursor.moveToNext();
-            }
 
-            bdLite.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+//        Produto produto = db.selecionaProduto(2);
+//        listViewProdutos.setAdapter((ListAdapter) produto);
+//        try {
+//            bdLite = openOrCreateDatabase("estoque", MODE_PRIVATE, null);
+//            Cursor meuCursor = bdLite.rawQuery("SELECT id, nomeProduto FROM produto", null);
+//            ArrayList<String> linhas = new ArrayList<String>();
+//            ArrayAdapter meuAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,
+//                    android.R.id.text1, linhas );
+//            listViewProdutos.setAdapter(meuAdapter);
+//            meuCursor.moveToFirst();
+//            while(meuCursor!=null){
+//                linhas.add(meuCursor.getString(1));
+//                meuCursor.moveToNext();
+//            }
+//
+//            bdLite.close();
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
     }
 }

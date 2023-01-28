@@ -1,4 +1,4 @@
-package model;
+package com.example.controleestoque.model;
 
 //Classe que cria a ListaEncadeada
 public class No {

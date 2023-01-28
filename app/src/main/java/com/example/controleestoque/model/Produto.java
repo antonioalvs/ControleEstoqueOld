@@ -1,4 +1,4 @@
-package model;
+package com.example.controleestoque.model;
 
 import java.util.Locale;
 
@@ -12,8 +12,8 @@ public class Produto {
     private int qtdMinima;
 
     //Construtor
-    public Produto(String nomeProduto, float valorProduto, int qtdAtual, int qtdMinima){
-        this.codigo = 0;
+    public Produto(int codigo,String nomeProduto, float valorProduto, int qtdAtual, int qtdMinima){
+        this.codigo = codigo;
         this.nomeProduto = nomeProduto;
         this.valorProduto = valorProduto;
         this.qtdAtual = qtdAtual;
